@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1b4332">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'self'">
+<title>Research Institute — Budget 2026</title>
+<style>
+:root{
+  --bg:#f7f5f0;--surface:#fff;--surface2:#f2efe9;--border:#ddd9d0;
+  --text:#1c1917;--muted:#6b6560;--faint:#a09b95;
+  --primary:#1b4332;--primary-mid:#2d6a4f;--primary-light:#e8f3ee;
+  --accent:#b45309;--danger:#dc2626;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --r:9px;
+  --hdr:56px;
+  --header-h:56px;
+  --bnav:62px;
+  --sat:env(safe-area-inset-top,0px);
+  --sab:env(safe-area-inset-bottom,0px);
+  --sal:env(safe-area-inset-left,0px);
+  --sar:env(safe-area-inset-right,0px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;min-height:100dvh}
+
+.is-ios header{background:rgba(27,67,50,.9)!important;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+.is-ios .bottom-nav{background:rgba(25,58,42,.95)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.is-android header{box-shadow:0 3px 10px rgba(0,0,0,.35)!important}
+.is-android .bottom-nav{box-shadow:0 -2px 8px rgba(0,0,0,.2)!important;padding-bottom:12px!important}
+.ripple-host{position:relative;overflow:hidden}
+.ripple-fx{position:absolute;border-radius:50%;background:rgba(255,255,255,.28);transform:scale(0);animation:ripple .5s linear;pointer-events:none}
+@keyframes ripple{to{transform:scale(5);opacity:0}}
+.drag-ghost{opacity:.4;background:var(--primary-light)!important;border-radius:var(--r)}
+.drag-chosen{background:rgba(27,67,50,.04)!important}
+.drag-handle{cursor:grab;color:var(--faint);font-size:1rem;padding:2px 6px 2px 2px;flex-shrink:0;touch-action:none;user-select:none;-webkit-user-select:none}
+.drag-handle:hover{color:var(--muted)}
+.drag-handle:active{cursor:grabbing}
+
+header{
+  background:var(--primary);
+  min-height:calc(var(--hdr) + var(--sat));
+  padding:calc(10px + var(--sat)) 18px 10px;
+  padding-left:max(18px,var(--sal));
+  padding-right:max(18px,var(--sar));
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+  position:sticky;
+  top:0;
+  z-index:200;
+  box-shadow:0 2px 14px rgba(0,0,0,.22);
+}
+.hdr-title{font-family:var(--serif);font-size:1.1rem;font-weight:300;color:#d4ede4;white-space:nowrap;flex-shrink:0;line-height:1.1}
+.hdr-title em{font-style:italic;font-weight:600;color:#fff}
+.hdr-mid{display:flex;align-items:center;gap:8px;flex:1;justify-content:center;flex-wrap:wrap}
+.tgl-pill{display:flex;gap:2px;background:rgba(255,255,255,.11);padding:3px;border-radius:7px;flex-shrink:0}
+.tgl{border:none;background:none;color:rgba(255,255,255,.52);padding:5px 11px;border-radius:5px;cursor:pointer;font-family:var(--sans);font-size:.74rem;font-weight:500;transition:all .15s;white-space:nowrap;min-height:32px;-webkit-tap-highlight-color:transparent}
+.tgl.active,.tgl:hover{background:rgba(255,255,255,.22);color:#fff}
+.tgl.active{font-weight:600}
+.cur-grp{display:flex;align-items:center;gap:5px;flex-shrink:0;flex-wrap:wrap}
+.fx-lbl{font-size:.64rem;color:rgba(255,255,255,.44);white-space:nowrap}
+.fx-in{width:44px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:4px;color:#fff;font-family:var(--mono);font-size:.71rem;padding:4px 5px;text-align:center;-moz-appearance:textfield}
+.fx-in::-webkit-outer-spin-button,.fx-in::-webkit-inner-spin-button{-webkit-appearance:none}
+.fx-in:focus{outline:none;background:rgba(255,255,255,.22)}
+.sym-in{width:36px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:4px;color:#fff;font-family:var(--mono);font-size:.75rem;padding:4px 5px;text-align:center}
+.sym-in:focus{outline:none;background:rgba(255,255,255,.22)}
+#fx-usd-grp,#fx-cust-grp{display:flex;align-items:center;gap:4px}
+.hdr-r{display:flex;align-items:center;gap:10px;margin-left:auto;flex-shrink:0}
+.hdr-stat-lbl{font-size:.57rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.44)}
+.hdr-stat-val{font-family:var(--mono);font-size:1.05rem;font-weight:500;color:#fff;line-height:1.1}
+.hdr-stat-sub{font-family:var(--mono);font-size:.59rem;color:rgba(255,255,255,.36)}
+.hdr-btn{background:var(--accent);border:none;color:#fff;padding:8px 13px;border-radius:6px;font-family:var(--sans);font-size:.74rem;font-weight:500;cursor:pointer;transition:background .15s;min-height:34px;-webkit-tap-highlight-color:transparent}
+.hdr-btn:hover{background:#92400e}
+
+.app-layout{display:grid;grid-template-columns:200px 1fr 275px;min-height:calc(100dvh - var(--header-h))}
+.scroll-mode{grid-template-columns:1fr 275px!important}
+.scroll-mode #sidebar-nav{display:none!important}
+.scroll-mode .cat-pane{display:block!important}
+.scroll-mode .cat-pane+.cat-pane{margin-top:40px;border-top:2px solid var(--border);padding-top:28px}
+.scroll-mode .pane-hdr{position:sticky;top:calc(var(--header-h) + 4px);background:var(--bg);z-index:9;padding-top:6px;padding-bottom:16px;margin-bottom:26px}
+
+nav#sidebar-nav{
+  background:var(--surface);
+  border-right:1px solid var(--border);
+  padding:18px 0;
+  position:sticky;
+  top:var(--header-h);
+  height:calc(100dvh - var(--header-h));
+  overflow-y:auto;
+}
+.nav-sec{font-size:.59rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);padding:0 17px;margin:12px 0 5px;display:block}
+.nav-wrap{padding:0 9px}
+.nav-btn{width:100%;padding:9px 9px;border:none;background:none;cursor:pointer;font-family:var(--sans);font-size:.79rem;font-weight:400;color:var(--muted);border-radius:6px;text-align:left;transition:all .13s;display:flex;align-items:center;justify-content:space-between;gap:5px;-webkit-tap-highlight-color:transparent}
+.nav-btn:hover{background:var(--surface2);color:var(--text)}
+.nav-btn.active{background:var(--primary-light);color:var(--primary);font-weight:500}
+.nav-pct{font-family:var(--mono);font-size:.63rem;color:var(--faint);background:var(--surface2);padding:1px 4px;border-radius:3px;flex-shrink:0}
+.nav-btn.active .nav-pct{background:rgba(27,67,50,.12);color:var(--primary-mid)}
+.nav-div{height:1px;background:var(--border);margin:9px 9px}
+.nav-note{padding:6px 13px;font-size:.69rem;color:var(--muted);line-height:1.7}
+
+main{padding:22px 26px;overflow-y:auto}
+.cat-pane{display:none}
+.cat-pane.active{display:block}
+.pane-hdr{margin-bottom:18px;padding-bottom:13px;border-bottom:1px solid var(--border);display:flex;align-items:flex-end;justify-content:space-between;background:var(--bg)}
+.pane-title{font-family:var(--serif);font-size:1.75rem;font-weight:300;color:var(--primary);letter-spacing:-.02em;line-height:1}
+.pane-title em{font-style:italic;font-weight:600}
+.pane-sub-lbl{font-size:.64rem;color:var(--faint);text-align:right;margin-bottom:1px}
+.pane-sub{font-family:var(--mono);font-size:.97rem;font-weight:500;color:var(--accent)}
+.subcat{margin-bottom:22px}
+.subcat-hdr{font-size:.63rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);padding:0 2px 7px;border-bottom:2px solid var(--primary-light);display:flex;justify-content:space-between;align-items:center}
+.subcat-tot{font-family:var(--mono);font-size:.7rem;color:var(--primary-mid);font-weight:500}
+
+.budget-row{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:10px 3px;border-bottom:1px solid #f0ece5;transition:background .1s}
+.budget-row:last-child{border-bottom:none}
+.budget-row:hover{background:rgba(255,255,255,.65);border-radius:7px}
+.row-info{min-width:0}
+.row-label{font-size:.84rem;font-weight:500;color:var(--text);margin-bottom:2px}
+.row-desc{font-size:.7rem;color:var(--muted);line-height:1.4}
+.lbl-in{border:none;background:transparent;font-family:var(--sans);font-size:.84rem;font-weight:500;color:var(--text);width:100%;padding:0;border-bottom:1.5px dashed var(--border)}
+.lbl-in:focus{outline:none;border-bottom-color:var(--primary)}
+.lbl-in::placeholder{color:var(--faint);font-weight:400}
+.dsc-in{border:none;background:transparent;font-family:var(--sans);font-size:.7rem;color:var(--muted);width:100%;padding:0;margin-top:2px;border-bottom:1px dashed transparent}
+.dsc-in:focus{outline:none;border-bottom-color:var(--border)}
+.dsc-in::placeholder{color:var(--faint)}
+.row-ctrl{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.in-blk{display:flex;flex-direction:column;gap:1px;align-items:flex-end}
+.in-lbl{font-size:.57rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+.bgt-in{width:105px;padding:5px 7px;border:1.5px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:.78rem;color:var(--text);background:var(--bg);text-align:right;transition:border-color .13s,box-shadow .13s;-moz-appearance:textfield}
+.bgt-in::-webkit-outer-spin-button,.bgt-in::-webkit-inner-spin-button{-webkit-appearance:none}
+.bgt-in:focus{outline:none;border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(27,67,50,.1)}
+.u-in{width:60px}
+.sep{width:1px;height:22px;background:var(--border);flex-shrink:0}
+.row-tot{font-family:var(--mono);font-size:.83rem;font-weight:500;color:var(--primary);text-align:right;min-width:90px}
+.del-btn{background:none;border:none;cursor:pointer;color:var(--faint);font-size:.8rem;padding:4px 4px;border-radius:4px;transition:all .15s;flex-shrink:0;min-width:28px;min-height:28px;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.del-btn:hover{color:var(--danger);background:#fef2f2}
+.add-btn{display:flex;align-items:center;justify-content:center;gap:5px;background:none;border:1.5px dashed var(--border);color:var(--faint);padding:8px;border-radius:7px;cursor:pointer;font-family:var(--sans);font-size:.74rem;width:100%;margin-top:8px;transition:all .15s;min-height:40px;-webkit-tap-highlight-color:transparent}
+.add-btn:hover{border-color:var(--primary-mid);color:var(--primary-mid);background:var(--primary-light)}
+.cont-pane-body{padding:16px 0 6px}
+.cont-info-box{background:var(--primary-light);border:1px solid #c5dfd3;border-radius:var(--r);padding:13px 16px;margin-bottom:18px;font-size:.8rem;color:var(--primary-mid);line-height:1.55}
+.cont-main-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--border)}
+.cont-main-lbl .row-label{font-size:.88rem}
+.cont-pct-big{display:flex;align-items:center;gap:8px}
+.cont-pct-big input{width:70px;padding:7px 10px;border:1.5px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:1rem;font-weight:500;text-align:center;-moz-appearance:textfield;background:var(--bg)}
+.cont-pct-big input::-webkit-outer-spin-button,.cont-pct-big input::-webkit-inner-spin-button{-webkit-appearance:none}
+.cont-pct-big input:focus{outline:none;border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(27,67,50,.1)}
+.cont-pct-unit{font-size:.85rem;color:var(--muted)}
+.cont-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.cont-result-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px}
+.cont-result-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);margin-bottom:3px}
+.cont-result-val{font-family:var(--mono);font-size:1.05rem;font-weight:500;color:var(--primary)}
+.cont-result-sub{font-family:var(--mono);font-size:.65rem;color:var(--faint);margin-top:1px}
+
+aside#sum-panel{
+  background:var(--surface);
+  border-left:1px solid var(--border);
+  padding:18px 15px;
+  position:sticky;
+  top:var(--header-h);
+  height:calc(100dvh - var(--header-h));
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.aside-ttl{font-family:var(--serif);font-size:.9rem;font-weight:600;color:var(--primary)}
+.chart-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:300px;height:auto;aspect-ratio:1/1;margin:0 auto;overflow:visible}
+#donut{display:block;width:100%;height:auto;aspect-ratio:1/1;max-width:300px;margin:0 auto}
+.chart-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.cl-val{font-family:var(--mono);font-size:.81rem;font-weight:500;color:var(--primary);line-height:1.2}
+.cl-lbl{font-size:.55rem;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.a-sep{height:1px;background:var(--border);flex-shrink:0}
+.b-item{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:2px 0}
+.b-l{display:flex;align-items:center;gap:5px;min-width:0}
+.b-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.b-lbl{font-size:.69rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-r{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0}
+.b-amt{font-family:var(--mono);font-size:.68rem;font-weight:500;color:var(--text)}
+.b-pct{font-family:var(--mono);font-size:.59rem;color:var(--faint)}
+.cont-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:10px 11px}
+.cont-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.cont-lbl{font-size:.76rem;font-weight:500;color:var(--text)}
+.cont-pct-row{display:flex;align-items:center;gap:4px}
+.cont-pct-row input{width:44px;padding:3px 5px;border:1.5px solid var(--border);border-radius:5px;font-family:var(--mono);font-size:.74rem;text-align:right;background:#fff;-moz-appearance:textfield;min-height:30px}
+.cont-pct-row input::-webkit-outer-spin-button,.cont-pct-row input::-webkit-inner-spin-button{-webkit-appearance:none}
+.cont-pct-row input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px rgba(27,67,50,.1)}
+.cont-pct-row span{font-size:.72rem;color:var(--muted)}
+.cont-amt{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.gt-box{background:var(--primary);color:#fff;border-radius:var(--r);padding:12px 13px 10px;flex-shrink:0}
+.gt-lbl{font-size:.58rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.44);margin-bottom:2px}
+.gt-amt{font-family:var(--mono);font-size:1.3rem;font-weight:500;color:#fff;line-height:1.15;word-break:break-all}
+.gt-ref{font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.35);margin-top:2px}
+.gt-change{margin-top:5px;font-size:.66rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:4px}
+.pill{padding:2px 6px;border-radius:20px;font-family:var(--mono);font-size:.64rem;font-weight:500}
+.pill-up{background:rgba(255,100,100,.25);color:#fca5a5}
+.pill-dn{background:rgba(100,220,160,.25);color:#6ee7b7}
+.pill-eq{background:rgba(255,255,255,.1);color:rgba(255,255,255,.45)}
+.rpt-btn{background:var(--accent);color:#fff;border:none;padding:9px 11px;border-radius:var(--r);font-family:var(--sans);font-size:.77rem;font-weight:500;cursor:pointer;width:100%;text-align:center;transition:background .15s;min-height:40px;-webkit-tap-highlight-color:transparent}
+.rpt-btn:hover{background:#92400e}
+.rst-btn{background:none;border:1.5px solid var(--border);color:var(--muted);padding:7px 11px;border-radius:var(--r);font-family:var(--sans);font-size:.72rem;cursor:pointer;width:100%;text-align:center;transition:all .13s;min-height:36px;-webkit-tap-highlight-color:transparent}
+.rst-btn:hover{border-color:var(--muted);color:var(--text)}
+
+.bottom-nav{
+  display:none;
+  position:fixed!important;
+  bottom:0!important;left:0!important;right:0!important;
+  z-index:9999;
+  will-change:transform;
+  background:var(--primary);
+  border-top:1px solid rgba(255,255,255,.1);
+  padding:6px 0 max(8px,var(--sab));
+  padding-left:var(--sal);padding-right:var(--sar);
+  flex-direction:row;align-items:stretch;
+}
+.bn-t{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:none;color:rgba(255,255,255,.42);font-family:var(--sans);font-size:.58rem;font-weight:500;cursor:pointer;padding:5px 2px;border-radius:6px;transition:color .15s;min-height:48px;-webkit-tap-highlight-color:transparent}
+.bn-t.active{color:#fff}
+.bn-icon{font-size:1.25rem;line-height:1}
+.bn-badge{font-family:var(--mono);font-size:.54rem;background:rgba(255,255,255,.13);padding:1px 5px;border-radius:10px;margin-top:1px}
+.bn-t.active .bn-badge{background:rgba(255,255,255,.22)}
+
+.sheet-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:400;opacity:0;transition:opacity .25s}
+.sheet-bg.vis{opacity:1}
+.sheet{position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--surface);border-radius:18px 18px 0 0;padding:0 18px calc(16px + var(--sab));padding-left:max(18px,var(--sal));padding-right:max(18px,var(--sar));max-height:88dvh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,0,.67,0);-webkit-overflow-scrolling:touch;overscroll-behavior:contain;box-shadow:0 -8px 40px rgba(0,0,0,.2)}
+.sheet.open{transform:translateY(0);transition-timing-function:cubic-bezier(.33,1,.68,1)}
+.sheet-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 14px}
+.sheet-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:11px;border-bottom:1px solid var(--border)}
+.sheet-ttl{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--primary)}
+.sheet-close{background:var(--surface2);border:none;color:var(--muted);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.sheet-body{display:flex;flex-direction:column;gap:13px}
+
+@media(max-width:1023px)and(min-width:768px){
+  .app-layout{grid-template-columns:1fr 260px}
+  #sidebar-nav{display:none}
+  .cat-pane{display:block}
+  .cat-pane+.cat-pane{margin-top:34px;border-top:2px solid var(--border);padding-top:26px}
+  .pane-hdr{position:sticky;top:var(--header-h);background:var(--bg);z-index:9;padding-top:6px}
+  main{padding:18px 20px}
+}
+
+@media(max-width:767px){
+  :root{--hdr:50px;--bnav:64px}
+  header{
+    align-items:flex-start;
+    gap:8px;
+    padding-top:calc(8px + var(--sat));
+    padding-bottom:8px;
+  }
+  .hdr-title{
+    width:100%;
+    white-space:normal;
+    line-height:1.15;
+  }
+  .hdr-mid{
+    width:100%;
+    justify-content:flex-start;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:8px;
+  }
+  .cur-grp{
+    width:100%;
+    align-items:flex-start;
+  }
+  .hdr-r{
+    width:100%;
+    justify-content:space-between;
+    margin-left:0;
+  }
+  .tgl-pill{
+    max-width:100%;
+    flex-wrap:wrap;
+  }
+  #fx-usd-grp,
+  #fx-cust-grp{
+    flex-wrap:wrap;
+  }
+  .app-layout{grid-template-columns:1fr!important}
+  #sidebar-nav{display:none!important}
+  aside#sum-panel{display:none!important}
+  .bottom-nav{display:flex!important}
+  main{
+    padding:14px 14px 90px;
+    padding-left:max(14px,var(--sal));
+    padding-right:max(14px,var(--sar));
+    grid-column:1;
+    overflow:visible;
+  }
+  .is-android main{padding-bottom:96px}
+  .is-ios main{padding-bottom:calc(78px + var(--sab))}
+  .cat-pane{display:none}
+  .cat-pane.active{display:block}
+  .scroll-mode .cat-pane{display:block!important}
+  .scroll-mode .cat-pane+.cat-pane{
+    margin-top:28px;
+    border-top:2px solid var(--border);
+    padding-top:22px;
+  }
+  .pane-hdr{position:sticky;top:var(--header-h);background:var(--bg);z-index:9;padding-top:6px;margin-bottom:12px}
+  .pane-title{font-size:1.5rem}
+  .hdr-title .sub-word{display:none}
+  .budget-row{grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:8px;padding:12px 0}
+  .budget-row .row-info{grid-column:2}
+  .budget-row .drag-handle{grid-row:1/3;align-self:center}
+  .row-ctrl{grid-column:2;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:6px;width:100%}
+  .sep{display:none}
+  .bgt-in{width:100%}
+  .u-in{width:60px}
+  .row-tot{min-width:72px;font-size:.85rem}
+  .in-blk{align-items:flex-start}
+  .add-btn{min-height:44px}
+  .del-btn{min-width:34px;min-height:34px}
+  .cont-result-grid{grid-template-columns:1fr}
+}
+@media(max-width:379px){
+  .hdr-title{font-size:.9rem}
+  .pane-title{font-size:1.3rem}
+}
+@media(max-width:767px)and(orientation:landscape){
+  :root{--hdr:44px;--bnav:52px}
+  main{padding-top:10px}
+  .is-android main,.is-ios main{padding-bottom:72px}
+}
+.cat-pane{scroll-margin-top:calc(var(--header-h) + 8px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-title">Research<span class="sub-word"> Institute</span> — <em>Budget 2026</em></div>
+
+  <div class="hdr-mid">
+    <div class="tgl-pill" id="view-tog">
+      <button class="tgl active" id="btn-tabs" onclick="setView('tabs')">⊞ Tabs</button>
+      <button class="tgl" id="btn-scroll" onclick="setView('scroll')">≡ Scroll</button>
+    </div>
+
+    <div class="cur-grp">
+      <div class="tgl-pill">
+        <button class="tgl active" id="btn-nis" onclick="setCurrency('NIS')">₪ NIS</button>
+        <button class="tgl" id="btn-usd" onclick="setCurrency('USD')">$ USD</button>
+        <button class="tgl" id="btn-cust" onclick="setCurrency('CUSTOM')"><span id="cust-btn-lbl">+ Other</span></button>
+      </div>
+      <div id="fx-usd-grp">
+        <span class="fx-lbl">1 USD =</span>
+        <input class="fx-in" type="number" id="fx-rate" value="3.7" min="0.001" step="0.01" oninput="onFxChange()">
+        <span class="fx-lbl">NIS</span>
+      </div>
+      <div id="fx-cust-grp" style="display:none">
+        <input class="sym-in" type="text" id="cust-sym" value="€" placeholder="€" maxlength="5" oninput="onCustChange()">
+        <span class="fx-lbl">=</span>
+        <input class="fx-in" type="number" id="cust-rate" placeholder="4.0" value="4.0" min="0.001" step="0.01" oninput="onCustChange()">
+        <span class="fx-lbl">NIS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdr-r">
+    <div>
+      <div class="hdr-stat-lbl">Total</div>
+      <div class="hdr-stat-val" id="hdr-total">—</div>
+      <div class="hdr-stat-sub" id="hdr-ref">—</div>
+    </div>
+    <button class="hdr-btn ripple-host" onclick="openReport()">📄 Report</button>
+  </div>
+</header>
+
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="bn-t active ripple-host" id="bnt-people" onclick="mobNav('people')"><span class="bn-icon">👥</span><span>People</span><span class="bn-badge" id="bnp-people">–</span></button>
+  <button class="bn-t ripple-host" id="bnt-operations" onclick="mobNav('operations')"><span class="bn-icon">🏢</span><span>Ops</span><span class="bn-badge" id="bnp-operations">–</span></button>
+  <button class="bn-t ripple-host" id="bnt-research" onclick="mobNav('research')"><span class="bn-icon">🔬</span><span>Research</span><span class="bn-badge" id="bnp-research">–</span></button>
+  <button class="bn-t ripple-host" id="bnt-governance" onclick="mobNav('governance')"><span class="bn-icon">⚖️</span><span>Gov</span><span class="bn-badge" id="bnp-governance">–</span></button>
+  <button class="bn-t ripple-host" id="bnt-contingency" onclick="mobNav('contingency')"><span class="bn-icon">💰</span><span>Reserve</span><span class="bn-badge" id="bnp-contingency">–</span></button>
+  <button class="bn-t summary-t ripple-host" onclick="openSheet()"><span class="bn-icon">📊</span><span>Summary</span><span class="bn-badge" id="bn-grand">—</span></button>
+</nav>
+
+<div class="sheet-bg" id="sheet-bg" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-hdr"><div class="sheet-ttl">Budget Summary</div><button class="sheet-close" onclick="closeSheet()">✕</button></div>
+  <div class="sheet-body" id="sheet-body"></div>
+</div>
+
+<div class="app-layout" id="app-layout">
+  <nav id="sidebar-nav">
+    <span class="nav-sec">Categories</span>
+    <div class="nav-wrap">
+      <button class="nav-btn active" id="nav-people" onclick="switchPane('people')"><span style="display:flex;align-items:center;gap:6px">👥 People</span><span class="nav-pct" id="npct-people">–</span></button>
+      <button class="nav-btn" id="nav-operations" onclick="switchPane('operations')"><span style="display:flex;align-items:center;gap:6px">🏢 Operations</span><span class="nav-pct" id="npct-operations">–</span></button>
+      <button class="nav-btn" id="nav-research" onclick="switchPane('research')"><span style="display:flex;align-items:center;gap:6px">🔬 Research</span><span class="nav-pct" id="npct-research">–</span></button>
+      <button class="nav-btn" id="nav-governance" onclick="switchPane('governance')"><span style="display:flex;align-items:center;gap:6px">⚖️ Governance</span><span class="nav-pct" id="npct-governance">–</span></button>
+      <button class="nav-btn" id="nav-contingency" onclick="switchPane('contingency')"><span style="display:flex;align-items:center;gap:6px">💰 Contingency</span><span class="nav-pct" id="npct-contingency">–</span></button>
+    </div>
+    <div class="nav-div"></div>
+    <div class="nav-note"><strong style="color:var(--text)">💡 Tip:</strong><br>Drag ⠿ to move lines<br>between categories.<br><br>Inputs always in NIS.</div>
+  </nav>
+
+  <main id="main-scroll">
+    <div class="cat-pane active" id="pane-people">
+      <div class="pane-hdr">
+        <div class="pane-title"><em>People</em></div>
+        <div><div class="pane-sub-lbl">Subtotal</div><div class="pane-sub" id="subtot-people">—</div></div>
+      </div>
+      <div class="subcat">
+        <div class="subcat-hdr"><span>Academic Staff</span><span class="subcat-tot" id="subcat-academic">—</span></div>
+        <div id="rows-academic"></div>
+        <button class="add-btn ripple-host" onclick="addLine('academic')">＋ Add budget line</button>
+      </div>
+      <div class="subcat">
+        <div class="subcat-hdr"><span>Admin &amp; Support Staff</span><span class="subcat-tot" id="subcat-admin">—</span></div>
+        <div id="rows-admin"></div>
+        <button class="add-btn ripple-host" onclick="addLine('admin')">＋ Add budget line</button>
+      </div>
+    </div>
+
+    <div class="cat-pane" id="pane-operations">
+      <div class="pane-hdr">
+        <div class="pane-title"><em>Operations</em></div>
+        <div><div class="pane-sub-lbl">Subtotal</div><div class="pane-sub" id="subtot-operations">—</div></div>
+      </div>
+      <div class="subcat">
+        <div class="subcat-hdr"><span>Office &amp; Facilities</span><span class="subcat-tot" id="subcat-office">—</span></div>
+        <div id="rows-office"></div>
+        <button class="add-btn ripple-host" onclick="addLine('office')">＋ Add budget line</button>
+      </div>
+      <div class="subcat">
+        <div class="subcat-hdr"><span>Technology &amp; Infrastructure</span><span class="subcat-tot" id="subcat-tech">—</span></div>
+        <div id="rows-tech"></div>
+        <button class="add-btn ripple-host" onclick="addLine('tech')">＋ Add budget line</button>
+      </div>
+    </div>
+
+    <div class="cat-pane" id="pane-research">
+      <div class="pane-hdr">
+        <div class="pane-title"><em>Research</em> Activity</div>
+        <div><div class="pane-sub-lbl">Subtotal</div><div class="pane-sub" id="subtot-research">—</div></div>
+      </div>
+      <div class="subcat">
+        <div class="subcat-hdr"><span>Research Outreach &amp; Dissemination</span><span class="subcat-tot" id="subcat-research">—</span></div>
+        <div id="rows-research"></div>
+        <button class="add-btn ripple-host" onclick="addLine('research')">＋ Add budget line</button>
+      </div>
+    </div>
+
+    <div class="cat-pane" id="pane-governance">
+      <div class="pane-hdr">
+        <div class="pane-title"><em>Governance</em></div>
+        <div><div class="pane-sub-lbl">Subtotal</div><div class="pane-sub" id="subtot-governance">—</div></div>
+      </div>
+      <div class="subcat">
+        <div class="subcat-hdr"><span>Operational Consulting</span><span class="subcat-tot" id="subcat-governance">—</span></div>
+        <div id="rows-governance"></div>
+        <button class="add-btn ripple-host" onclick="addLine('governance')">＋ Add budget line</button>
+      </div>
+    </div>
+
+    <div class="cat-pane" id="pane-contingency">
+      <div class="pane-hdr">
+        <div class="pane-title">💰 <em>Contingency</em></div>
+        <div><div class="pane-sub-lbl">Reserve amount</div><div class="pane-sub" id="subtot-contingency">—</div></div>
+      </div>
+      <div class="cont-pane-body">
+        <div class="cont-info-box">
+          The contingency reserve is a buffer calculated as a percentage of all other budget lines combined. It covers unexpected costs, scope changes, and budget overruns. A rate of 5–10% is typical for institutional budgets.
+        </div>
+        <div class="cont-main-row">
+          <div class="cont-main-lbl">
+            <div class="row-label">Reserve Percentage</div>
+            <div class="row-desc">Applied to total before contingency</div>
+          </div>
+          <div class="cont-pct-big">
+            <input type="number" id="contingency-pct-main" value="5" min="0" max="50" step="0.5" oninput="syncContPct(this.value)">
+            <span class="cont-pct-unit">% of subtotal</span>
+          </div>
+        </div>
+        <div class="cont-result-grid">
+          <div class="cont-result-card">
+            <div class="cont-result-lbl">Subtotal (before reserve)</div>
+            <div class="cont-result-val" id="cont-base">—</div>
+          </div>
+          <div class="cont-result-card">
+            <div class="cont-result-lbl">Contingency reserve</div>
+            <div class="cont-result-val" id="cont-reserve-val">—</div>
+            <div class="cont-result-sub" id="cont-reserve-sub">—</div>
+          </div>
+          <div class="cont-result-card" style="background:var(--primary);color:#fff;border-color:var(--primary)">
+            <div class="cont-result-lbl" style="color:rgba(255,255,255,.5)">Grand Total</div>
+            <div class="cont-result-val" style="color:#fff" id="cont-grand-val">—</div>
+            <div class="cont-result-sub" id="cont-grand-sub">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <aside id="sum-panel">
+    <div class="aside-ttl">Budget Summary</div>
+    <div class="chart-wrap">
+      <canvas id="donut" width="175" height="175"></canvas>
+      <div class="chart-center"><div class="cl-val" id="chart-center">—</div><div class="cl-lbl">total</div></div>
+    </div>
+    <div class="a-sep"></div>
+    <div id="breakdown"></div>
+    <div class="a-sep"></div>
+    <div class="cont-box">
+      <div class="cont-top">
+        <span class="cont-lbl">Contingency</span>
+        <div class="cont-pct-row">
+          <input type="number" id="contingency-pct" value="5" min="0" max="50" step="0.5" oninput="syncContPct(this.value)">
+          <span>%</span>
+        </div>
+      </div>
+      <div class="cont-amt" id="contingency-amt">—</div>
+    </div>
+    <div class="gt-box">
+      <div class="gt-lbl">Total Annual Budget</div>
+      <div class="gt-amt" id="gt-amt">—</div>
+      <div class="gt-ref" id="gt-ref">—</div>
+      
+    </div>
+    <button class="rpt-btn ripple-host" onclick="openReport()">📄 Generate Report</button>
+    <button class="rst-btn ripple-host" onclick="resetAll()">↺ Reset to defaults</button>
+  </aside>
+</div>
+
+<script>
+(function(){
+  const ua=navigator.userAgent;
+  const isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const isAnd=/Android/.test(ua);
+  const mob=window.innerWidth<=767||isIOS||isAnd;
+  if(isIOS){document.body.classList.add('is-ios','is-mobile');}
+  if(isAnd){document.body.classList.add('is-android','is-mobile');}
+  if(mob&&!isIOS&&!isAnd)document.body.classList.add('is-mobile');
+  window._dev={isIOS,isAnd,mob};
+  if(isAnd){
+    const fix=()=>{document.documentElement.style.setProperty('--real-vh',window.innerHeight*0.01+'px');};
+    fix(); window.addEventListener('resize',fix);
+  }
+})();
+
+document.addEventListener('pointerdown',e=>{
+  if(!window._dev?.isAnd)return;
+  const h=e.target.closest('.ripple-host');if(!h)return;
+  const r=h.getBoundingClientRect(),d=Math.max(r.width,r.height)*2;
+  const el=document.createElement('span');
+  el.className='ripple-fx';
+  el.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
+  h.appendChild(el);setTimeout(()=>el.remove(),600);
+});
+
+
+const GROUPS=['academic','admin','office','tech','research','governance'];
+const PALETTE={
+  academic:'#1b4332',admin:'#2d7a55',office:'#c8852a',tech:'#e0a84b',
+  research:'#3b72b8',governance:'#7c5cbf',contingency:'#b5826f'
+};
+const LABELS={
+  academic:'Academic Staff',admin:'Admin & Support',office:'Office & Facilities',
+  tech:'Technology',research:'Research Activity',governance:'Governance',contingency:'Contingency'
+};
+
+let currency='NIS', fxRate=3.7, custSym='€', custRate=4.0, viewMode='tabs', uid=1000;
+
+const DEFAULTS={
+  academic:[
+    {id:'director', label:'Director Salary', desc:'Senior faculty + lead position', perUnit:600000,units:1, hasUnits:true, unitLabel:'position'},
+    {id:'faculty', label:'In-house Faculty Salaries', desc:'Mixed academic ranks (averaged)', perUnit:468000,units:15,hasUnits:true, unitLabel:'faculty'},
+    {id:'postdocs', label:'Postdoctoral Researchers', desc:'Limited-term contracts', perUnit:144000,units:20,hasUnits:true, unitLabel:'postdocs'},
+    {id:'doctoral', label:'Doctoral Students', desc:'Scholarship-based funding', perUnit:108000,units:20,hasUnits:true, unitLabel:'students'},
+    {id:'undergrad',label:'Undergraduate Interns', desc:'Limited-term positions', perUnit:36000, units:20,hasUnits:true, unitLabel:'interns'},
+    {id:'visiting', label:'Visiting Scholars', desc:'6-month stays + travel support (~5K USD/person)', perUnit:95000, units:10,hasUnits:true, unitLabel:'scholars/yr'},
+    {id:'pd_acad', label:'Professional Development — Academic Staff', desc:'Workshops, courses, skill development, memberships (excl. travel)',perUnit:8000,units:35,hasUnits:true,unitLabel:'researchers'},
+  ],
+  admin:[
+    {id:'admin_sal', label:'Admin & Technical Staff', desc:'~1:3 admin-to-academics ratio (averaged across roles)', perUnit:250000,units:5, hasUnits:true, unitLabel:'staff'},
+    {id:'travel_fac',label:'Faculty Travel', desc:'Science-related fund equivalent (~7,800 USD/person)', perUnit:23400, units:15,hasUnits:true, unitLabel:'faculty'},
+    {id:'travel_stu',label:'Student Travel', desc:'Science-related fund equivalent (~1,500 USD/person)', perUnit:4500, units:20,hasUnits:true, unitLabel:'students'},
+    {id:'pd_admin', label:'Professional Development — Admin Staff', desc:'Training, certifications, courses for admin & IT staff',perUnit:6000,units:5,hasUnits:true,unitLabel:'staff'},
+  ],
+  office:[
+    {id:'building', label:'Building Maintenance', desc:'Cleaning, insurance, security (no rent assumed)', perUnit:550000,units:1, hasUnits:false},
+    {id:'equipment',label:'Equipment Refresh & Setup', desc:'Office setup, 4-year amortization (~81 people total)', perUnit:20000, units:81,hasUnits:true, unitLabel:'people'},
+  ],
+  tech:[
+    {id:'servers', label:'Servers & Data Infrastructure', desc:'Active, backup, storage + licensing (no in-house room)', perUnit:1000000,units:1,hasUnits:false},
+    {id:'cyber_mon', label:'Monitoring & Security', desc:'Cybersecurity coverage (~100 users)', perUnit:100000, units:1,hasUnits:false},
+    {id:'ai_tools', label:'AI Tools & Licenses', desc:'60× ChatGPT Plus + 10× ChatGPT Pro (or equivalent)', perUnit:120000, units:1,hasUnits:false},
+    {id:'research_sw',label:'Research-Specific Software', desc:'Reference manager, project mgmt, data analysis', perUnit:100000, units:1,hasUnits:false},
+    {id:'it_help', label:'IT Help Desk', desc:'External support hours (ongoing)', perUnit:50000, units:1,hasUnits:false},
+    {id:'network', label:'Network & Wi-Fi Maintenance', desc:'Running costs post-infrastructure setup', perUnit:50000, units:1,hasUnits:false},
+    {id:'web', label:'Web Domain & Tooling', desc:'Hosting + maintenance + security monitoring (annual)', perUnit:150000, units:1,hasUnits:false},
+    {id:'cybersec', label:'Cybersecurity & Data Protection', desc:'Incl. backups/archives — IL-based, higher-end estimate', perUnit:700000, units:1,hasUnits:false},
+  ],
+  research:[
+    {id:'open_access',label:'Dissemination Fees (Open Access)', desc:'2 publications/person × ~3,000 USD per publication', perUnit:6200, units:56,hasUnits:true,unitLabel:'publications'},
+    {id:'seed', label:'Seed Grants', desc:'Small funds to kick-start research ideas (à la Purdue)', perUnit:30000,units:20,hasUnits:true,unitLabel:'grants'},
+    {id:'outreach', label:'Research Program Outreach', desc:'Seminars, events, summer camps, school partnerships', perUnit:100000,units:1,hasUnits:false},
+    {id:'voucher', label:'Research Facilities Vouchers', desc:'Use of hosting university labs/equipment (per senior)', perUnit:50000, units:15,hasUnits:true,unitLabel:'seniors'},
+  ],
+  governance:[
+    {id:'legal', label:'Legal', desc:'External contractors (Year 1 may be higher due to setup)', perUnit:100000,units:1,hasUnits:false},
+    {id:'accounting',label:'Accounting', desc:'External contractors', perUnit:50000, units:1,hasUnits:false},
+  ],
+};
+let state=dc(DEFAULTS);
+function dc(o){return JSON.parse(JSON.stringify(o))}
+const allItems=()=>GROUPS.flatMap(g=>state[g]);
+
+function getRate(){return currency==='USD'?fxRate:currency==='CUSTOM'?custRate:1}
+function toDisp(nis){return currency==='NIS'?nis:nis/getRate()}
+function sym(){
+  const liveSym=document.getElementById('cust-sym')?.value.trim();
+  const raw=currency==='USD' ? '$' : currency==='CUSTOM' ? (custSym || liveSym || '€') : '₪';
+  return raw.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function fmt(nis){
+  if(!nis||isNaN(nis))return'–';
+  const n=Math.round(toDisp(nis));
+  return sym()+'\u202f'+n.toLocaleString(currency==='USD'?'en-US':'en-IL');
+}
+function fmtS(nis){
+  if(!nis)return'–';
+  const n=Math.round(toDisp(nis));
+  if(n>=1e6)return sym()+(n/1e6).toFixed(1)+'M';
+  if(n>=1e3)return sym()+(n/1e3).toFixed(0)+'K';
+  return sym()+n;
+}
+function fmtRef(g){
+  if(currency==='NIS')return'≈ $'+Math.round(g/fxRate/1e6).toFixed(1)+'M USD';
+  return'≈ ₪'+Math.round(g/1e6).toFixed(1)+'M NIS';
+}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function renderRows(cid,gk){
+  const el=document.getElementById(cid);if(!el)return;
+  el.innerHTML='';
+  state[gk].forEach(item=>{
+    const tot=item.perUnit*item.units;
+    const row=document.createElement('div');
+    row.className='budget-row';row.dataset.id=item.id;row.draggable=true;
+
+    const info=item.isCustom
+      ?`<div class="row-info">
+          <input class="lbl-in" type="text" id="lbl-${item.id}" value="${esc(item.label)}" placeholder="Budget line name…">
+          <input class="dsc-in" type="text" id="dsc-${item.id}" value="${esc(item.desc)}" placeholder="Description (optional)">
+        </div>`
+      :`<div class="row-info">
+          <div class="row-label">${item.label}</div>
+          <div class="row-desc">${item.desc}</div>
+        </div>`;
+
+    const unHtml=item.hasUnits
+      ?`<div class="in-blk">
+          <span class="in-lbl">${item.unitLabel||'units'}</span>
+          <input class="bgt-in u-in" type="number" id="un-${item.id}" value="${item.units}" min="0" inputmode="numeric" oninput="onChange('${item.id}')">
+        </div>`:'';
+
+    const delHtml=item.isCustom
+      ?`<button class="del-btn ripple-host" onclick="delLine('${item.id}','${gk}')" title="Remove">✕</button>`:'';
+
+    row.innerHTML=`
+      <span class="drag-handle" title="Drag to reorder">⠿</span>
+      ${info}
+      <div class="row-ctrl">
+        <div class="in-blk">
+          <span class="in-lbl">₪ / unit</span>
+          <input class="bgt-in" type="number" id="pu-${item.id}" value="${item.perUnit}" min="0" step="1000" inputmode="numeric" oninput="onChange('${item.id}')">
+        </div>
+        ${unHtml}
+        <div class="row-tot" id="rt-${item.id}">${fmt(tot)}</div>
+        ${delHtml}
+      </div>`;
+    el.appendChild(row);
+  });
+
+  bindNativeDnD(el);
+}
+
+
+function bindNativeDnD(container){
+  if(!container) return;
+  const rows=[...container.querySelectorAll('.budget-row')];
+  rows.forEach(row=>{
+    row.addEventListener('dragstart',e=>{
+      const handle=e.target.closest('.drag-handle');
+      if(!handle){ e.preventDefault(); return; }
+      row.classList.add('drag-chosen');
+      e.dataTransfer.effectAllowed='move';
+      e.dataTransfer.setData('text/plain',row.dataset.id||'');
+      window._dragRow=row;
+    });
+    row.addEventListener('dragend',()=>{
+      row.classList.remove('drag-chosen');
+      document.querySelectorAll('.drag-ghost').forEach(el=>el.classList.remove('drag-ghost'));
+      window._dragRow=null;
+      syncFromDOM();
+      updateAll();
+    });
+    row.addEventListener('dragover',e=>{
+      e.preventDefault();
+      const dragging=window._dragRow;
+      if(!dragging || dragging===row) return;
+      row.classList.add('drag-ghost');
+      const rect=row.getBoundingClientRect();
+      const after=e.clientY > rect.top + rect.height/2;
+      if(after) row.after(dragging); else row.before(dragging);
+    });
+    row.addEventListener('dragleave',()=>row.classList.remove('drag-ghost'));
+    row.addEventListener('drop',e=>{
+      e.preventDefault();
+      row.classList.remove('drag-ghost');
+    });
+  });
+  container.addEventListener('dragover',e=>e.preventDefault());
+  container.addEventListener('drop',e=>{
+    e.preventDefault();
+    const dragging=window._dragRow;
+    if(dragging && e.target===container) container.appendChild(dragging);
+  });
+}
+
+function renderAll(){ GROUPS.forEach(g=>renderRows(`rows-${g}`,g)); }
+
+function syncFromDOM(){
+  GROUPS.forEach(g=>syncGroup(g));
+  const flat=GROUPS.flatMap(g=>state[g]);
+  const ns={};
+  GROUPS.forEach(gk=>{
+    ns[gk]=[];
+    document.querySelectorAll(`#rows-${gk} .budget-row`).forEach(row=>{
+      const item=flat.find(i=>i.id===row.dataset.id);
+      if(item)ns[gk].push(item);
+    });
+  });
+  state=ns;
+}
+
+function onChange(id){
+  const item=allItems().find(i=>i.id===id);if(!item)return;
+  const pu=parseFloat(document.getElementById(`pu-${id}`)?.value)||0;
+  const un=item.hasUnits?(parseFloat(document.getElementById(`un-${id}`)?.value)||0):1;
+  const el=document.getElementById(`rt-${id}`);if(el)el.textContent=fmt(pu*un);
+  updateAll();
+}
+function refreshTotals(){
+  GROUPS.forEach(g=>state[g].forEach(item=>{
+    const el=document.getElementById(`rt-${item.id}`);if(!el)return;
+    const pu=parseFloat(document.getElementById(`pu-${item.id}`)?.value)||0;
+    const un=item.hasUnits?(parseFloat(document.getElementById(`un-${item.id}`)?.value)||0):1;
+    el.textContent=fmt(pu*un);
+  }));
+}
+
+function syncGroup(gk){
+  state[gk].forEach(item=>{
+    const pu=document.getElementById(`pu-${item.id}`);if(pu)item.perUnit=parseFloat(pu.value)||item.perUnit;
+    const un=document.getElementById(`un-${item.id}`);if(un&&item.hasUnits)item.units=parseFloat(un.value)||item.units;
+    const lb=document.getElementById(`lbl-${item.id}`);if(lb)item.label=lb.value;
+    const ds=document.getElementById(`dsc-${item.id}`);if(ds)item.desc=ds.value;
+  });
+}
+function addLine(gk){
+  syncGroup(gk);
+  const ni={id:`c${uid++}`,label:'',desc:'',perUnit:0,units:1,hasUnits:true,unitLabel:'units',isCustom:true};
+  state[gk].push(ni);
+  renderRows(`rows-${gk}`,gk);
+  updateAll();
+  setTimeout(()=>document.getElementById(`lbl-${ni.id}`)?.focus(),60);
+}
+function delLine(id,gk){
+  syncGroup(gk);
+  state[gk]=state[gk].filter(i=>i.id!==id);
+  renderRows(`rows-${gk}`,gk);
+  updateAll();
+}
+
+let chart;
+function drawDonut(values){
+  const canvas=document.getElementById('donut');
+  if(!canvas) return;
+  const wrap=canvas.parentElement;
+  const available=Math.max(180, Math.min((wrap?.clientWidth||300)-8, 300));
+  const size=Math.round(available);
+  canvas.style.width=size+'px';
+  canvas.style.height=size+'px';
+  const dpr=window.devicePixelRatio||1;
+  canvas.width=Math.round(size*dpr);
+  canvas.height=Math.round(size*dpr);
+  const ctx=canvas.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,size,size);
+
+  const cx=size/2, cy=size/2;
+  const outer=(size/2)-8;
+  const inner=Math.max(size*0.37, outer-56);
+  const total=values.reduce((a,b)=>a+b,0);
+
+  const drawSlice=(start,end,color)=>{
+    ctx.beginPath();
+    ctx.arc(cx,cy,outer,start,end,false);
+    ctx.arc(cx,cy,inner,end,start,true);
+    ctx.closePath();
+    ctx.fillStyle=color;
+    ctx.fill();
+  };
+
+  if(total<=0){
+    drawSlice(0,Math.PI*2,'#e5e0d8');
+    return;
+  }
+
+  let start=-Math.PI/2;
+  [...GROUPS,'contingency'].forEach((k,idx)=>{
+    const val=values[idx]||0;
+    if(val<=0) return;
+    const slice=(val/total)*Math.PI*2;
+    drawSlice(start,start+slice,PALETTE[k]);
+    start+=slice;
+  });
+
+  ctx.beginPath();
+  ctx.arc(cx,cy,inner,0,Math.PI*2);
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--surface').trim()||'#fff';
+  ctx.fill();
+}
+function initChart(){
+  drawDonut(new Array(7).fill(0));
+}
+
+function calcGroup(gk){
+  return state[gk].reduce((s,item)=>{
+    const pu=parseFloat(document.getElementById(`pu-${item.id}`)?.value)??item.perUnit;
+    const un=item.hasUnits?(parseFloat(document.getElementById(`un-${item.id}`)?.value)??item.units):1;
+    return s+pu*un;
+  },0);
+}
+function $s(id,v){const el=document.getElementById(id);if(el)el.textContent=v;}
+
+function updateAll(){
+  const tot={};GROUPS.forEach(k=>tot[k]=calcGroup(k));
+  const sub=GROUPS.reduce((s,k)=>s+tot[k],0);
+  const cp=parseFloat(document.getElementById('contingency-pct').value)||0;
+  const cont=sub*(cp/100),grand=sub+cont;
+
+  refreshTotals();
+  $s('subcat-academic',fmt(tot.academic));$s('subcat-admin',fmt(tot.admin));
+  $s('subcat-office',fmt(tot.office));$s('subcat-tech',fmt(tot.tech));
+  $s('subcat-research',fmt(tot.research));$s('subcat-governance',fmt(tot.governance));
+  $s('subtot-people',fmt(tot.academic+tot.admin));
+  $s('subtot-operations',fmt(tot.office+tot.tech));
+  $s('subtot-research',fmt(tot.research));
+  $s('subtot-governance',fmt(tot.governance));
+  $s('subtot-contingency',fmt(cont));
+
+  const pMap={people:['academic','admin'],operations:['office','tech'],research:['research'],governance:['governance']};
+  Object.entries(pMap).forEach(([p,ks])=>{
+    const pt=ks.reduce((s,k)=>s+tot[k],0);
+    const pct=grand>0?((pt/grand)*100).toFixed(0)+'%':'–';
+    $s(`npct-${p}`,pct);$s(`bnp-${p}`,pct);
+  });
+  const contPct=grand>0?((cont/grand)*100).toFixed(0)+'%':'–';
+  $s('npct-contingency',contPct);$s('bnp-contingency',contPct);
+
+  $s('cont-base',fmt(sub));
+  $s('cont-reserve-val',fmt(cont));
+  $s('cont-reserve-sub',`${cp}% of ₪${Math.round(sub/1e6).toFixed(1)}M`);
+  $s('cont-grand-val',fmt(grand));
+  $s('cont-grand-sub',fmtRef(grand));
+
+  $s('contingency-amt',fmt(cont));
+  $s('gt-amt',fmt(grand));$s('gt-ref',fmtRef(grand));
+  $s('hdr-total',fmtS(grand));$s('hdr-ref',fmtRef(grand));
+  $s('chart-center',fmtS(grand));
+  $s('bn-grand',fmtS(grand));
+
+  drawDonut([...GROUPS.map(k=>tot[k]),cont]);
+
+  const listEl=document.getElementById('breakdown');
+  if(listEl){
+    const vals=[...GROUPS.map(k=>({k,v:tot[k]})),{k:'contingency',v:cont}];
+    listEl.innerHTML=vals.map(({k,v})=>{
+      const pct=grand>0?((v/grand)*100).toFixed(1):'0.0';
+      return `<div class="b-item">
+        <div class="b-l"><span class="b-dot" style="background:${PALETTE[k]}"></span><span class="b-lbl">${LABELS[k]}</span></div>
+        <div class="b-r"><span class="b-amt">${fmt(v)}</span><span class="b-pct">${pct}%</span></div>
+      </div>`;
+    }).join('');
+  }
+  if(document.getElementById('sheet').classList.contains('open'))renderSheet(tot,cont,grand,cp);
+}
+
+function syncContPct(v){
+  document.getElementById('contingency-pct').value=v;
+  document.getElementById('contingency-pct-main').value=v;
+  updateAll();
+}
+
+function setCurrency(c){
+  currency=c;
+  ['nis','usd','cust'].forEach(x=>document.getElementById(`btn-${x}`).classList.toggle('active',
+    (c==='NIS'&&x==='nis')||(c==='USD'&&x==='usd')||(c==='CUSTOM'&&x==='cust')));
+  document.getElementById('fx-usd-grp').style.display=c==='USD'?'flex':'none';
+  document.getElementById('fx-cust-grp').style.display=c==='CUSTOM'?'flex':'none';
+  if(c==='CUSTOM'){
+    const symInput=document.getElementById('cust-sym');
+    if(symInput && !symInput.value.trim()) symInput.value='€';
+    custSym=(symInput?.value||'').trim()||'€';
+    const btnLbl=document.getElementById('cust-btn-lbl');
+    if(btnLbl) btnLbl.textContent = custSym ? (custSym + ' · Other') : '+ Other';
+  }
+  updateAll();
+}
+
+function onFxChange(){
+  fxRate=parseFloat(document.getElementById('fx-rate').value)||3.7;
+  updateAll();
+}
+
+function onCustChange(){
+  custSym=(document.getElementById('cust-sym')?.value||'').trim();
+  custRate=parseFloat(document.getElementById('cust-rate')?.value)||1;
+  currency='CUSTOM';
+  ['nis','usd'].forEach(x=>document.getElementById(`btn-${x}`)?.classList.remove('active'));
+  document.getElementById('btn-cust')?.classList.add('active');
+  const btnLbl=document.getElementById('cust-btn-lbl');
+  if(btnLbl) btnLbl.textContent=custSym ? (custSym+' · Other') : '+ Other';
+  updateAll();
+}
+
+function setView(mode){
+  viewMode=mode;
+  document.getElementById('btn-tabs').classList.toggle('active',mode==='tabs');
+  document.getElementById('btn-scroll').classList.toggle('active',mode==='scroll');
+  const layout=document.getElementById('app-layout');
+  if(mode==='scroll'){
+    layout.classList.add('scroll-mode');
+    document.querySelectorAll('.cat-pane').forEach(p=>p.classList.add('active'));
+  }else{
+    layout.classList.remove('scroll-mode');
+    document.querySelectorAll('.cat-pane').forEach(p=>p.classList.remove('active'));
+    const activeNav=document.querySelector('.nav-btn.active');
+    const activeMob=document.querySelector('.bn-t.active:not(.summary-t)');
+    const name=activeNav?.id?.replace('nav-','')||activeMob?.id?.replace('bnt-','')||'people';
+    document.getElementById(`pane-${name}`)?.classList.add('active');
+  }
+  syncHeaderHeight();
+}
+
+function switchPane(name){
+  if(viewMode==='scroll')return;
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.cat-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById(`nav-${name}`)?.classList.add('active');
+  document.getElementById(`pane-${name}`)?.classList.add('active');
+}
+
+function mobNav(name){
+  if(viewMode==='tabs'){
+    document.querySelectorAll('.cat-pane').forEach(p=>p.classList.remove('active'));
+    document.getElementById(`pane-${name}`)?.classList.add('active');
+    const main=document.getElementById('main-scroll');
+    if(main) main.scrollTop=0;
+    window.scrollTo({top:0,behavior:'auto'});
+  }else{
+    document.getElementById(`pane-${name}`)?.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  document.querySelectorAll('.bn-t:not(.summary-t)').forEach(b=>b.classList.remove('active'));
+  document.getElementById(`bnt-${name}`)?.classList.add('active');
+}
+
+const obs=new IntersectionObserver(entries=>{
+  if(window.innerWidth>767||viewMode==='tabs')return;
+  entries.forEach(e=>{
+    if(e.isIntersecting&&e.intersectionRatio>=0.25){
+      const name=e.target.id.replace('pane-','');
+      document.querySelectorAll('.bn-t:not(.summary-t)').forEach(b=>b.classList.remove('active'));
+      document.getElementById(`bnt-${name}`)?.classList.add('active');
+    }
+  });
+},{threshold:0.25,rootMargin:'-80px 0px -40% 0px'});
+
+function renderSheet(tot,cont,grand,cp){
+  const bdHtml=[...GROUPS.map(k=>({k,v:tot[k]})),{k:'contingency',v:cont}].map(({k,v})=>{
+    const p=grand>0?((v/grand)*100).toFixed(1):'0.0';
+    return `<div class="b-item">
+      <div class="b-l"><span class="b-dot" style="background:${PALETTE[k]}"></span><span class="b-lbl">${LABELS[k]}</span></div>
+      <div class="b-r"><span class="b-amt">${fmt(v)}</span><span class="b-pct">${p}%</span></div>
+    </div>`;
+  }).join('');
+  document.getElementById('sheet-body').innerHTML=`
+    <div class="gt-box" style="border-radius:var(--r)">
+      <div class="gt-lbl">Total Annual Budget</div>
+      <div class="gt-amt">${fmt(grand)}</div>
+      <div class="gt-ref">${fmtRef(grand)}</div>
+      
+    </div>
+    <div>${bdHtml}</div>
+    <div class="a-sep"></div>
+    <div class="cont-box">
+      <div class="cont-top"><span class="cont-lbl">Contingency reserve</span>
+        <div class="cont-pct-row">
+          <input type="number" id="cp-sheet" value="${cp}" min="0" max="50" step="0.5"
+            oninput="syncContPct(this.value)" inputmode="decimal">
+          <span>%</span>
+        </div>
+      </div>
+      <div class="cont-amt">${fmt(cont)}</div>
+    </div>
+    <button class="rpt-btn ripple-host" onclick="openReport();closeSheet()">📄 Generate Report</button>
+    <button class="rst-btn ripple-host" style="margin-bottom:4px" onclick="resetAll();closeSheet()">↺ Reset to defaults</button>`;
+}
+function openSheet(){
+  const tot={};GROUPS.forEach(k=>tot[k]=calcGroup(k));
+  const cp=parseFloat(document.getElementById('contingency-pct').value)||0;
+  const sub=GROUPS.reduce((s,k)=>s+tot[k],0),cont=sub*(cp/100),grand=sub+cont;
+  renderSheet(tot,cont,grand,cp);
+  document.getElementById('sheet-bg').style.display='block';
+  document.getElementById('sheet').style.display='block';
+  setTimeout(()=>{document.getElementById('sheet-bg').classList.add('vis');document.getElementById('sheet').classList.add('open');},10);
+  document.body.style.overflow='hidden';
+}
+function closeSheet(){
+  document.getElementById('sheet-bg').classList.remove('vis');
+  document.getElementById('sheet').classList.remove('open');
+  setTimeout(()=>{document.getElementById('sheet-bg').style.display='none';document.getElementById('sheet').style.display='none';},320);
+  document.body.style.overflow='';
+}
+
+function resetAll(){
+  if(!confirm('Reset all to defaults? Custom lines will be removed.'))return;
+  state=dc(DEFAULTS);
+  document.getElementById('contingency-pct').value=5;
+  document.getElementById('contingency-pct-main').value=5;
+  document.getElementById('fx-rate').value=3.7;
+  document.getElementById('cust-rate').value=4.0;
+  document.getElementById('cust-sym').value='€';
+  document.getElementById('cust-btn-lbl').textContent='€ · Other';
+  fxRate=3.7;custRate=4.0;custSym='€';currency='NIS';
+  setCurrency('NIS');renderAll();updateAll();syncHeaderHeight();
+}
+
+function openReport(){
+  GROUPS.forEach(g=>syncGroup(g));
+  const tot={};GROUPS.forEach(k=>tot[k]=calcGroup(k));
+  const sub=GROUPS.reduce((s,k)=>s+tot[k],0);
+  const cp=parseFloat(document.getElementById('contingency-pct').value)||0;
+  const cont=sub*(cp/100),grand=sub+cont;
+  const rf=nis=>sym()+' '+Math.round(toDisp(nis)).toLocaleString();
+  const gdefs=[
+    {key:'academic',title:'Academic Staff',items:state.academic},
+    {key:'admin',title:'Admin & Support Staff',items:state.admin},
+    {key:'office',title:'Office & Facilities',items:state.office},
+    {key:'tech',title:'Technology & Infrastructure',items:state.tech},
+    {key:'research',title:'Research Activity',items:state.research},
+    {key:'governance',title:'Governance',items:state.governance},
+  ];
+  function gv(item,f){const el=document.getElementById(`${f}-${item.id}`);return el?parseFloat(el.value)||0:(f==='pu'?item.perUnit:item.units);}
+  let tbody='';
+  gdefs.forEach(g=>{
+    tbody+=`<tr class="sh"><td colspan="4">${g.title}</td></tr>`;
+    g.items.forEach(item=>{
+      const pu=gv(item,'pu'),un=item.hasUnits?gv(item,'un'):1,t=pu*un;
+      const lbl=item.isCustom?(document.getElementById(`lbl-${item.id}`)?.value||'(untitled)'):item.label;
+      tbody+=`<tr><td class="in">${esc(lbl)}${item.isCustom?'<span class="ctag">custom</span>':''}</td>
+        <td class="n">₪ ${Math.round(pu).toLocaleString()}</td>
+        <td class="n">${item.hasUnits?un:'—'}</td>
+        <td class="n b">${rf(t)}</td></tr>`;
+    });
+    tbody+=`<tr class="gt2"><td colspan="3">Subtotal — ${g.title}</td><td class="n">${rf(tot[g.key])}</td></tr>`;
+  });
+  const curLabel=currency==='CUSTOM'?(custSym||'Custom'):currency==='USD'?'USD ($)':'NIS (₪)';
+  const rateNote=currency==='NIS'?'':(currency==='USD'?` (inputs in NIS, @ ${fxRate} NIS/USD)`:` (inputs in NIS, @ ${custRate} NIS/${custSym||'unit'})`);
+
+  const html=`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; img-src 'self' data: blob:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'self'">
+<title>Budget Report 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#1c1917;font-size:13px;max-width:900px;margin:0 auto;padding:36px 28px}
+@media(max-width:600px){body{padding:18px 14px}table{font-size:11px}}
+.cover{margin-bottom:28px;border-bottom:3px solid #1b4332;padding-bottom:18px}
+.ct{font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.4rem,4vw,2rem);font-weight:300;color:#1b4332;line-height:1.1;margin-bottom:5px}
+.ct em{font-style:italic;font-weight:600}
+.meta{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:.67rem;color:#888;margin-top:7px;line-height:1.8}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:26px}
+.sc{border:1px solid #ddd;border-radius:7px;padding:11px 13px}
+.sl{font-size:.59rem;text-transform:uppercase;letter-spacing:.08em;color:#888;margin-bottom:3px}
+.sv{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:.95rem;font-weight:500;color:#1b4332}
+.ss{font-family:'DM Mono',monospace;font-size:.63rem;color:#aaa;margin-top:2px}
+table{width:100%;border-collapse:collapse;margin-bottom:22px}
+th{background:#1b4332;color:#fff;padding:7px 10px;text-align:left;font-size:11px;font-weight:500;letter-spacing:.04em}
+th.n{text-align:right}
+tr.sh td{background:#f0ece6;font-weight:600;font-size:.75rem;padding:7px 10px;color:#1b4332;text-transform:uppercase;letter-spacing:.04em;border-top:2px solid #ddd}
+tr td{padding:6px 10px;border-bottom:1px solid #f2ede8;vertical-align:middle}
+td.in{padding-left:16px;color:#333}
+td.n{text-align:right;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace}
+td.b{font-weight:500;color:#1b4332}
+tr.gt2 td{background:#e8f3ee;font-weight:600;color:#1b4332;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;border-top:1px solid #cde3d8}
+tr.gt2 td:first-child{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;padding-left:10px}
+.ft{border-collapse:collapse;width:100%}
+.ft td{padding:7px 10px;border-bottom:1px solid #eee}
+.ft .fg td{background:#1b4332;color:#fff;font-weight:600;border:none;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace}
+.ft .fg td:first-child{font-family:'DM Sans',sans-serif}
+.n{text-align:right;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace}
+.ctag{display:inline-block;margin-left:5px;font-size:.56rem;background:#f0ece6;color:#888;border-radius:3px;padding:1px 4px;vertical-align:middle;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+</style></head><body>
+<div class="cover">
+  <div class="ct">Research Institute<br><em>Budget Report</em> 2026</div>
+  <div class="meta">Generated: ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}<br>
+  Display currency: ${curLabel}${rateNote}<br>
+  Period: Annual running costs</div>
+</div>
+<div class="sg">
+  <div class="sc"><div class="sl">Total Annual Budget</div><div class="sv">${rf(grand)}</div><div class="ss">${fmtRef(grand)}</div></div>
+  <div class="sc"><div class="sl">Before Contingency</div><div class="sv">${rf(sub)}</div><div class="ss">Contingency ${cp}% → ${rf(cont)}</div></div>
+</div>
+<table><thead><tr><th>Budget Line</th><th class="n">₪/Unit</th><th class="n">Units</th><th class="n">Total (${curLabel})</th></tr></thead><tbody>${tbody}</tbody></table>
+<table class="ft">
+  <tr><td>Subtotal (before contingency)</td><td class="n">${rf(sub)}</td></tr>
+  <tr><td>Contingency reserve (${cp}%)</td><td class="n">${rf(cont)}</td></tr>
+  <tr class="fg"><td>Total Annual Budget</td><td class="n">${rf(grand)}</td></tr>
+</table>
+</body></html>`;
+  const w=window.open('','_blank');
+  if(!w) return;
+  w.document.write(html);
+  w.document.close();
+}
+
+function syncHeaderHeight(){
+  const header=document.querySelector('header');
+  if(!header) return;
+  const h=Math.ceil(header.getBoundingClientRect().height);
+  document.documentElement.style.setProperty('--header-h', h + 'px');
+}
+
+syncHeaderHeight();
+renderAll();
+initChart();
+updateAll();
+syncHeaderHeight();
+
+document.querySelectorAll('.cat-pane').forEach(p=>obs.observe(p));
+
+window.addEventListener('resize',()=>{
+  clearTimeout(window._rt);
+  window._rt=setTimeout(()=>{
+    syncHeaderHeight();
+    renderAll();
+    updateAll();
+    syncHeaderHeight();
+  },200);
+});
+
+window.addEventListener('orientationchange',()=>{
+  setTimeout(()=>{
+    syncHeaderHeight();
+    updateAll();
+  },250);
+});
+
+if(window._dev?.isIOS){
+  document.addEventListener('touchend',e=>{
+    if(e.target.type==='number') e.preventDefault();
+  },{passive:false});
+}
+
+document.getElementById('fx-usd-grp').style.display='none';
+</script>
+</body>
+</html>
