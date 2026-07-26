@@ -60,5 +60,4 @@ Use the drag handle (⠿) to reorder a budget line. Lines can also be moved betw
 
 **Reset the model**
 Use Reset to defaults to restore all original values. This removes custom lines and discards current edits
-<img width="468" height="644" alt="image" src="https://github.com/user-attachments/assets/21d535ae-aa68-4872-84f7-83c0122e2d37" />
 
